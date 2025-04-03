@@ -22,8 +22,16 @@ public class JumpScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Jump();
         Movement();
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            rBody.AddForce(Vector3.up * jumpForce);
+        }
     }
 
     private void Movement()
@@ -43,6 +51,20 @@ public class JumpScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             this.transform.position += Vector3.right * Time.deltaTime * speed;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == 3)
+        {
+            canJump = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 3)
+        {
+            canJump = false;
         }
     }
 }
