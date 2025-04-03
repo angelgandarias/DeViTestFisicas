@@ -7,7 +7,7 @@ public class JumpScript : MonoBehaviour
         Rigidbody rBody ;
         public int jumpForce;
         public int speed;
-        bool canJump;
+        public bool canJump;
     // Start is called before the first frame update
     void Start()
     {
