@@ -15,6 +15,15 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space)){
+            DoShoot();
+        }
+    }
+
+    void DoShoot()
+    {
+       GameObject instanciatedBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
+        instanciatedBullet.GetComponent<Rigidbody>().AddForce(transform.forward*force);
+
     }
 }
