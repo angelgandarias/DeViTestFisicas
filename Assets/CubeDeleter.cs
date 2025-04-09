@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class CubeDeleter : MonoBehaviour
 {
+    int health = 3;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name != "Plane")
         {
-            Destroy(collision.gameObject);
+            Debug.Log("Target hit");
+            health -= 1;
+            if (health <= 0)
+            {
+                Destroy(this.gameObject);
+                Debug.Log("Target destroyed");
+            }
         }
     }
 }

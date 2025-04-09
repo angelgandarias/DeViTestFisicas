@@ -7,6 +7,8 @@ public class Shoot : MonoBehaviour
 {
     public int force;
     public GameObject bullet;
+    public GameObject shootPoint;
+    MeshRenderer mr;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,9 @@ public class Shoot : MonoBehaviour
 
     void DoShoot()
     {
-       GameObject instanciatedBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
+       GameObject instanciatedBullet = Instantiate(bullet, shootPoint.transform.position, this.transform.rotation);
         //instanciatedBullet.transform.position = new Vector3 (0f, 0f, 0f);
-        //instanciatedBullet.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        instanciatedBullet.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
         instanciatedBullet.GetComponent<Rigidbody>().AddForce(transform.forward*force);
 
@@ -35,6 +37,8 @@ public class Shoot : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
+            mr = hit.collider.GetComponent<MeshRenderer>();
+            mr.material.color = Color.green;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
         }
         else
